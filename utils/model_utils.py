@@ -9,7 +9,7 @@ def create_rnn_model(vocab_size, embedding_dim=128, rnn_units=64, maxlen=100, nu
         Embedding(input_dim=vocab_size, output_dim=embedding_dim, input_length=maxlen),
         SimpleRNN(rnn_units, return_sequences=False),
         Dropout(0.5),
-        Dense(num_classes, activation='sigmoid')
+        Dense(num_classes, activation='softmax')
     ])
     model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
     return model
