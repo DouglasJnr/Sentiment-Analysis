@@ -16,7 +16,6 @@ def create_rnn_model(vocab_size, embedding_dim=128, rnn_units=64, maxlen=100, nu
 
 
 def evaluate_model(y_true, y_pred):
-    y_pred_bin = (y_pred > 0.5).astype(int)
-    acc = accuracy_score(y_true, y_pred_bin)
-    f1 = f1_score(y_true, y_pred_bin)
+    acc = accuracy_score(y_true, y_pred)
+    f1 = f1_score(y_true, y_pred, average='weighted')  # Use 'weighted' or 'macro'
     return acc, f1
