@@ -1,6 +1,6 @@
 import streamlit as st
 from utils.twitter_api import authenticate_twitter, fetch_tweets
-from utils.preproceessing import clean_text
+from utils.preprocessing import clean_text
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 import pickle
