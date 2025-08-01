@@ -1,14 +1,22 @@
 import streamlit as st
+import numpy as np
+import pickle
+import os
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from utils.twitter_api import authenticate_twitter, fetch_tweets
 from utils.preprocessing import clean_text
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
-import numpy as np
-import pickle
 
 #load resources
-model = load_model('models/sentiment_rnn.keras')
-tokenizer = pickle.load(open('models/tokenizer.pkl', 'rb'))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, '..', 'models', 'sentiment_rnn.keras')
+model = load_model(MODEL_PATH)
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+TOKENIZER_PATH = os.path.join(BASE_DIR, '..', 'models', 'tokenizer.pkl')
+tokenizer = pickle.load(open(TOKENIZER_PATH, 'rb'))
 
 st.title("Real-Time Twitter Sentiment Analysis")
 
