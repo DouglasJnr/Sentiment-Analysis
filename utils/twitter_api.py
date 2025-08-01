@@ -1,8 +1,10 @@
 import tweepy
+from dotenv import load_dotenv
 import os
 
 def authenticate_twitter():
-    client = tweepy.Client(bearer_token=getenv['BEARER_TOKEN'], wait_on_rate_limit=True)
+    load_dotenv()
+    client = tweepy.Client(bearer_token=os.getenv('TWITTER_BEARER_TOKEN'), wait_on_rate_limit=True)
     return client
 
 def fetch_tweets(client, query, max_tweets=100):

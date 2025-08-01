@@ -3,10 +3,11 @@ from utils.twitter_api import authenticate_twitter, fetch_tweets
 from utils.preprocessing import clean_text
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
+import numpy as np
 import pickle
 
 #load resources
-model = load_model('models/sentiment_rnn.h5')
+model = load_model('models/sentiment_rnn.keras')
 tokenizer = pickle.load(open('models/tokenizer.pkl', 'rb'))
 
 st.title("Real-Time Twitter Sentiment Analysis")
@@ -26,7 +27,9 @@ if st.button("Analyze"):
         padded = pad_sequences(sequences, maxlen=100)
 
         predictions = model.predict(padded)
-        sentiments = ["Positive" if p > 0.5 else "Negative" for p in predictions]
+        sentiment_labels = ["Irrelevant", "Negative", "Neutral", "Positive" ]  # Adjust based on your model's classes
+        predicted_classes = np.argmax(predictions, axis=1)
+        sentiments = [sentiment_labels[i] for i in predicted_classes]
 
         for tweet, sentiment in zip(tweets, sentiments):
             st.markdown(f"**{sentiment}** : {tweet}")
