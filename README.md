@@ -163,7 +163,7 @@ If you want to make changes or run this project under your own GitHub account:
 ```sh
 streamlit run app/streamlit_app.py
 ```
-### :notebook: 
+### :notebook: Run notebook for EDA and model training
 From JupyterLab or VSCode/PyCharm:
 ```sh
 jupyter lab
