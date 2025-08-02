@@ -157,7 +157,7 @@ If you want to make changes or run this project under your own GitHub account:
 
 
 <!-- USAGE EXAMPLES -->
-## 📈 Usage
+## Usage
 
 ### :test_tube: Run the Streamlit App
 ```sh
@@ -173,7 +173,7 @@ Make sure to switch the kernel to you environment if using `venv`
 python -m ipykernel install --user --name=sentiment-env --display-name "Python (sentiment-env)"
 ```
 
-## ⏯️ Demo Preview
+## Demo Preview
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---
