@@ -67,7 +67,7 @@ It serves as a full-stack ML pipeline for natural language processing (NLP), sui
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-### ⭐ Features:
+### Features:
 
 * Live tweet fetching via Twitter API
 * Sentiment classification: Positive, Neutral, Negative, Irrelevant
@@ -77,7 +77,7 @@ It serves as a full-stack ML pipeline for natural language processing (NLP), sui
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### 🧱 Key Components:
+### Key Components:
 
 * **RNN Model** using Keras/TensorFlow
 * **Tweepy API integration** for Twitter data
@@ -201,6 +201,3 @@ Project Link: [https://github.com/douglasjnr/sentiment-analysis](https://github.
 [stars-url]: https://github.com/douglasjnr/sentiment-analysis/stargazers
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/douglas-junior-tanyanyiwa
-[Pandas-url]: https://pandas.pydata.org/
-[Matplotlib]: https://github.com/devicons/devicon/blob/master/icons/matplotlib/matplotlib-original.svg
-[Matplotlib-url]: https://matplotlib.org/
