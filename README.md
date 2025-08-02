@@ -19,7 +19,7 @@
     <br />
     <a href="https://github.com/douglasjnr/sentiment-analysis"><strong>Explore the docs »</strong></a>
     <br />
-    <a href="demo-preview">View Demo</a>
+    <a href="#demo-preview">View Demo</a>
   </p>
 </div>
 
@@ -47,7 +47,7 @@
     <li>
       <a href="#usage">Usage</a>
       <ul>
-        <li><a href="demo-preview">Demo Preview</a></li>
+        <li><a href="#demo-preview">Demo Preview</a></li>
       </ul>
     </li>
     <li><a href="#contact">Contact</a></li>
