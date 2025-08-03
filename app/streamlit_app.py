@@ -8,6 +8,16 @@ from utils.twitter_api import authenticate_twitter, fetch_tweets
 from utils.preprocessing import clean_text
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
+from utils.twitter_api import check_rate_limit
+
+rate_limit_info = check_rate_limit()
+if rate_limit_info["remaining"] is not None:
+    st.sidebar.write(f"**Rate Limit Remaining:** {rate_limit_info['remaining']}")
+    from datetime import datetime
+    reset_time = datetime.fromtimestamp(rate_limit_info["reset_timestamp"])
+    st.sidebar.write(f"**Resets At:** {reset_time.strftime('%Y-%m-%d %H:%M:%S')}")
+else:
+    st.sidebar.warning("Could not retrieve rate limit info.")
 
 #load resources
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
