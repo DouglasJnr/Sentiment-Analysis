@@ -4,7 +4,7 @@ import pickle
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from utils.twitter_api import authenticate_twitter, fetch_tweets, check_rate_limit_from_client
+from utils.twitter_api import authenticate_twitter, fetch_tweets
 from utils.preprocessing import clean_text
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
