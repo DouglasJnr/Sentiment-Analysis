@@ -13,16 +13,12 @@ def authenticate_twitter():
 HEADERS = {"Authorization": f"Bearer {os.getenv('TWITTER_BEARER_TOKEN')}"}
 
 #Check rate limit
-def check_rate_limit():
-    url = "https://api.twitter.com/2/tweets/search/recent"
-    response = requests.get(url, headers=HEADERS, params={"query": "test", "max_results": 10})
-
-    remaining = response.headers.get("x-rate-limit-remaining")
-    reset = response.headers.get("x-rate-limit-reset")
-
+def check_rate_limit_from_client(client):
+    response = client.search_recent_tweets(query="test", max_results=10, tweet_fields=["id"])
+    headers = client.get_last_response().headers
     return {
-        "remaining": int(remaining) if remaining else None,
-        "reset_timestamp": int(reset) if reset else None
+        "remaining": int(headers.get("x-rate-limit-remaining")),
+        "reset_timestamp": int(headers.get("x-rate-limit-reset"))
     }
 
 

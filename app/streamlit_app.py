@@ -4,11 +4,10 @@ import pickle
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from utils.twitter_api import authenticate_twitter, fetch_tweets
+from utils.twitter_api import authenticate_twitter, fetch_tweets, check_rate_limit_from_client
 from utils.preprocessing import clean_text
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
-from utils.twitter_api import check_rate_limit
 
 # load resources
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -19,15 +18,6 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 TOKENIZER_PATH = os.path.join(BASE_DIR, '..', 'models', 'tokenizer.pkl')
 tokenizer = pickle.load(open(TOKENIZER_PATH, 'rb'))
 
-# Display remaining rate limit on sidebar
-rate_limit_info = check_rate_limit()
-if rate_limit_info["remaining"] is not None:
-    st.sidebar.write(f"**Rate Limit Remaining:** {rate_limit_info['remaining']}")
-    from datetime import datetime
-    reset_time = datetime.fromtimestamp(rate_limit_info["reset_timestamp"])
-    st.sidebar.write(f"**Resets At:** {reset_time.strftime('%Y-%m-%d %H:%M:%S')}")
-else:
-    st.sidebar.warning("Could not retrieve rate limit info.")
 
 # Display Title
 st.title("Real-Time Twitter Sentiment Analysis")
@@ -36,6 +26,18 @@ query = st.text_input("Enter a Twitter search query (e.g 'Cryptocurrency', 'AI',
 
 if st.button("Analyze"):
     client = authenticate_twitter()
+
+    # Display remaining rate limit on sidebar
+    rate_limit_info = check_rate_limit_from_client(client)
+    if rate_limit_info["remaining"] is not None:
+        st.sidebar.write(f"**Rate Limit Remaining:** {rate_limit_info['remaining']}")
+        from datetime import datetime
+
+        reset_time = datetime.fromtimestamp(rate_limit_info["reset_timestamp"])
+        st.sidebar.write(f"**Resets At:** {reset_time.strftime('%Y-%m-%d %H:%M:%S')}")
+    else:
+        st.sidebar.warning("Could not retrieve rate limit info.")
+
     tweets = fetch_tweets(client, query)
 
     if not tweets:
