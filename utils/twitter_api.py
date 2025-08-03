@@ -12,7 +12,7 @@ def authenticate_twitter():
 
 HEADERS = {"Authorization": f"Bearer {os.getenv('TWITTER_BEARER_TOKEN')}"}
 
-
+#Check rate limit
 def check_rate_limit():
     url = "https://api.twitter.com/2/tweets/search/recent"
     response = requests.get(url, headers=HEADERS, params={"query": "test", "max_results": 10})

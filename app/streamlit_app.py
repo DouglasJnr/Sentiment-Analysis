@@ -10,6 +10,16 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from utils.twitter_api import check_rate_limit
 
+# load resources
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, '..', 'models', 'sentiment_rnn.keras')
+model = load_model(MODEL_PATH)
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+TOKENIZER_PATH = os.path.join(BASE_DIR, '..', 'models', 'tokenizer.pkl')
+tokenizer = pickle.load(open(TOKENIZER_PATH, 'rb'))
+
+# Display remaining rate limit on sidebar
 rate_limit_info = check_rate_limit()
 if rate_limit_info["remaining"] is not None:
     st.sidebar.write(f"**Rate Limit Remaining:** {rate_limit_info['remaining']}")
@@ -19,15 +29,7 @@ if rate_limit_info["remaining"] is not None:
 else:
     st.sidebar.warning("Could not retrieve rate limit info.")
 
-#load resources
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL_PATH = os.path.join(BASE_DIR, '..', 'models', 'sentiment_rnn.keras')
-model = load_model(MODEL_PATH)
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-TOKENIZER_PATH = os.path.join(BASE_DIR, '..', 'models', 'tokenizer.pkl')
-tokenizer = pickle.load(open(TOKENIZER_PATH, 'rb'))
-
+# Display Title
 st.title("Real-Time Twitter Sentiment Analysis")
 
 query = st.text_input("Enter a Twitter search query (e.g 'Cryptocurrency', 'AI', 'elections')")
