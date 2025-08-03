@@ -5,6 +5,7 @@ from nltk.corpus import stopwords
 
 stop_words = set(stopwords.words('english'))
 
+# Function to clean text data
 def clean_text(text):
     text = text.lower()
     text = re.sub(r"http\S+|www\S+|https\S+", '', text, flags=re.MULTILINE)

@@ -9,25 +9,28 @@ from utils.preprocessing import clean_text
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
-# load resources
+# Load the pre-trained model and tokenizer
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, '..', 'models', 'sentiment_rnn.keras')
 model = load_model(MODEL_PATH)
 
+# Load the tokenizer
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 TOKENIZER_PATH = os.path.join(BASE_DIR, '..', 'models', 'tokenizer.pkl')
 tokenizer = pickle.load(open(TOKENIZER_PATH, 'rb'))
 
 
-# Display Title
+# Streamlit app setup
 st.title("Real-Time Twitter Sentiment Analysis")
 
+#
 query = st.text_input("Enter a Twitter search query (e.g 'Cryptocurrency', 'AI', 'elections')")
 
+# Ensure the query is not empty
 if st.button("Analyze"):
     client = authenticate_twitter()
 
-    # Display remaining rate limit on sidebar
+    # Display rate limit information
     rate_limit_info = check_rate_limit_from_client(client)
     if rate_limit_info["remaining"] is not None:
         st.sidebar.write(f"**Rate Limit Remaining:** {rate_limit_info['remaining']}")
@@ -38,8 +41,10 @@ if st.button("Analyze"):
     else:
         st.sidebar.warning("Could not retrieve rate limit info.")
 
+    # Fetch tweets based on the query
     tweets = fetch_tweets(client, query)
 
+    # Display the number of tweets fetched
     if not tweets:
         st.warning("No Tweets found")
     else:
