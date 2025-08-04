@@ -51,8 +51,6 @@ if st.button("Analyze"):
     # Display the number of tweets fetched
     if error_type == "monthly_cap":
         st.error("You may have exceeded your monthly tweet cap (10,000 tweets/month).")
-    elif error_type == "rate_limit":
-        st.error("Rate limit exceeded. Please wait before trying again.")
     elif error_type == "error":
         st.error("An unexpected error occurred.")
     elif not tweets:

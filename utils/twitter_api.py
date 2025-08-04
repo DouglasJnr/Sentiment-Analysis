@@ -14,13 +14,10 @@ def authenticate_twitter():
 def fetch_tweets(client, query, max_tweets=10):
     try:
         tweets = client.search_recent_tweets(query=query, max_results=max_tweets, tweet_fields=["text"])
-        return [tweet.text for tweet in tweets.data] if tweets.data else []
+        return ([tweet.text for tweet in tweets.data], None) if tweets.data else ([], "no tweets")
 
     except tweepy.errors.Forbidden:
         return [], "monthly_cap"
-
-    except tweepy.errors.TooManyRequests:
-        return [], "rate_limit"
 
     except Exception:
         return [], "error"
