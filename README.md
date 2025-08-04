@@ -178,6 +178,27 @@ python -m ipykernel install --user --name=sentiment-env --display-name "Python (
 ```
 
 ## Demo Preview
+  ```sh
+   Streamlit Landing Page
+  ```
+  <img src="images/Streamlit_app.png" alt="Logo" width="1000" height="1000">
+
+  
+
+
+  ```sh
+   Enter a term you would like to query
+  ```
+  <img src="images/Streamlit_query.png" alt="Logo" width="1000" height="1000">
+
+
+
+
+  ```sh
+   Real-time results of query
+  ```
+  <img src="images/Streamlit_sentiment.png" alt="Logo" width="1000" height="1000">
+  
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---
